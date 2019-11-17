@@ -16,6 +16,7 @@ fromStation="";
 stations = [];
 recommendedPath  = [];
 accessCode = "";
+displaySharedDestination = "";
   constructor(private apiService: ApiService,private signalRService: SignalRService){
 
   }
@@ -24,7 +25,8 @@ accessCode = "";
       this.stations = this.apiService.stations;
     });
     this.signalRService.newMessage.subscribe(data => {  
-      console.log(data);
+     // console.log(data);
+     this.displaySharedDestination = data['station'];
     });
   } 
 
@@ -55,9 +57,25 @@ accessCode = "";
 
 startTracking = function(){
       navigator.geolocation.getCurrentPosition(resp => {
-       this.signalRService.shareTrackingInfo({lng: resp.coords.longitude, lat: resp.coords.latitude}).subscribe(data =>{
-         
-       } );
+       let nearestStation =  this.getNearestStation( resp.coords.longitude, resp.coords.latitude);
+       this.signalRService.shareTrackingInfo(nearestStation).subscribe(data =>{
+
+       });
     });
+}
+
+getNearestStation = function(longitude,latitude){
+let distances = [];
+let latitudeDistances = [];
+for(let index=0;index<this.stations.length;index++){
+  let long = parseFloat(this.stations[index].long) - parseFloat(longitude);
+  let lat = parseFloat(this.stations[index].lat) - parseFloat(latitude);
+  let sum = Math.sqrt(long*long + lat*lat)
+  distances.push(sum);  
+}
+let oldDist = [...distances];
+ distances.sort();
+ const nearestStn = oldDist.indexOf(distances[0])
+ return this.stations[nearestStn].name;
 }
 }

@@ -35,7 +35,7 @@ export class ApiService {
 
   }
 
-  private baseURL: string = "http://delhimetro.azurewebsites.net/api/";
+  private baseURL: string = "https://delhimetro.azurewebsites.net/api/";
   constructor(private httpClient: HttpClient) {
 
   }

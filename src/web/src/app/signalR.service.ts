@@ -45,7 +45,7 @@ this.hubConnection.on('newMessage', data => {
   }
 
   shareTrackingInfo(info): Observable<any> {
-    return this.http.post<any>(this.baseURL+'messages',{"sender":"","longitute":info.lng,"latitude":info.lat,"type":"trackingInfo","text":this.accessCode});
+    return this.http.post<any>(this.baseURL+'messages',{"sender":"","station":info,"type":"trackingInfo","text":this.accessCode});
   }
 
   setUserSharingInfo = function (name,accessCode) {
