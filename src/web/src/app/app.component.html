@@ -1,33 +1,34 @@
 <h1 class="center">Welcome to Delhi Metro Travel Assistant</h1>
 
 <div class="center">
+    <div class="track-ride"><button class="btn" (click)="enterTrackingCode()"> Track Ride</button>
+        <div *ngIf="displaySharedDestination">
+            {{displaySharedDestination}}
+        </div>
+    </div>
     <div style="height: 30px; margin: 40px; ">
         <label class="label">From</label>
-        <select name="Station" style="height: 40px;
-    width: 250px;padding: 10px;" [(ngModel)]="fromStation">
+        <select name="Station" class="select-drop" [(ngModel)]="fromStation">
             <option *ngFor="let station Of stations" value="{{station.sId}}">{{station.name}}</option>
 
         </select>
     </div>
     <div style="height: 30px; margin: 40px; ">
-        <label class="label">To</label>
-        <select name="Station" style="height: 40px;
-  width: 250px;padding:10px" [(ngModel)]="toStation">
-            <option *ngFor="let station Of stations" value="{{station.sId}}">{{station.name}}</option>
+        <label class="label" style="margin-left: -30px;">To</label>
+        <select name="Station" class="select-drop" [(ngModel)]="toStation">
+            <option class="option" *ngFor="let station Of stations" value="{{station.sId}}">{{station.name}}</option>
         </select>
     </div>
     <button (click)="searchRecommendedPath()"
         *ngIf="toStation != fromStation && (toStation != '' && fromStation!= '')">Search</button>
-        <div *ngIf="recommendedPath.length > 0"> 
-            <div *ngFor="let path of recommendedPath">{{path.name}}</div>
-            <div><button (click)="generateSharingLink()"> Generate Sharing Link</button>
-                <button (click)="enterTrackingCode()"> Track Ride</button>
-            <label> Please share the code -  {{accessCode}}</label> 
-            
-            </div>
-        </div>
+    <div *ngIf="recommendedPath.length > 0">
+        <div class="option" *ngFor="let path of recommendedPath">{{path.name}}</div>
+        <div><button class="btn" (click)="generateSharingLink()"> Generate Sharing Link</button> </div>
+        <div>
+            <label *ngIf="isCodeGenerated"> Please share the code - {{accessCode}}</label>
 
-        <div *ngIf="displaySharedDestination">
-            {{displaySharedDestination}}
         </div>
+    </div>
+
+
 </div>

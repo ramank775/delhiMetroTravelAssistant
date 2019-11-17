@@ -33,7 +33,7 @@ this.hubConnection = new SignalR.HubConnectionBuilder()
         .build();
 this.hubConnection.start().catch(error => console.error(error));
 this.hubConnection.on('newMessage', data => {
-    if(data.type == "trackingInfo" && data.text == this.accessCode){
+    if(data.type == "trackingInfo" && data.text == this.trackingCode){
         this.newMessage.next(data);
     }
       });

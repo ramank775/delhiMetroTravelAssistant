@@ -17,6 +17,7 @@ stations = [];
 recommendedPath  = [];
 accessCode = "";
 displaySharedDestination = "";
+isCodeGenerated = false;
   constructor(private apiService: ApiService,private signalRService: SignalRService){
 
   }
@@ -42,6 +43,7 @@ displaySharedDestination = "";
 
   generateSharingLink = function() {
     let name = prompt("Enter your name"); 
+    this.isCodeGenerated=true;
     this.accessCode = Math.random().toString(36).substr(2, 9);  
     this.signalRService.setUserSharingInfo(name,this.accessCode);
     this.signalRService.init(this.accessCode);   

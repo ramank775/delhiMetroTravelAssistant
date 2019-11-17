@@ -6,3 +6,21 @@
     margin-left: 20px;
     margin-right: 20px;
 }
+
+.btn{
+    padding: 10px;
+    margin: 5px;
+}
+
+.option{
+    padding:5px
+}
+
+.select-drop{
+    height: 40px;
+    width: 250px;padding: 10px;
+}
+.track-ride{
+    float: right;
+    margin-right: 20px!important;
+}
