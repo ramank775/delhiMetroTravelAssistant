@@ -1,0 +1,29 @@
+<h1 class="center">Welcome to Delhi Metro Travel Assistant</h1>
+
+<div class="center">
+    <div style="height: 30px; margin: 40px; ">
+        <label class="label">From</label>
+        <select name="Station" style="height: 40px;
+    width: 250px;padding: 10px;" [(ngModel)]="fromStation">
+            <option *ngFor="let station Of stations" value="{{station.sId}}">{{station.name}}</option>
+
+        </select>
+    </div>
+    <div style="height: 30px; margin: 40px; ">
+        <label class="label">To</label>
+        <select name="Station" style="height: 40px;
+  width: 250px;padding:10px" [(ngModel)]="toStation">
+            <option *ngFor="let station Of stations" value="{{station.sId}}">{{station.name}}</option>
+        </select>
+    </div>
+    <button (click)="searchRecommendedPath()"
+        *ngIf="toStation != fromStation && (toStation != '' && fromStation!= '')">Search</button>
+        <div *ngIf="recommendedPath.length > 0"> 
+            <div *ngFor="let path of recommendedPath">{{path.name}}</div>
+            <div><button (click)="generateSharingLink()"> Generate Sharing Link</button>
+                <button (click)="enterTrackingCode()"> Track Ride</button>
+            <label> Please share the code -  {{accessCode}}</label> 
+            
+            </div>
+        </div>
+</div>
